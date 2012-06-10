@@ -1,3 +1,7 @@
+section {
+  color: hsl(282, 24%, 8%);
+}
+
 #ml-dark {
   background-color: hsl(0, 0%, 11%);
   color: white;
