@@ -20,11 +20,17 @@ section, .view head > title {
   margin: 1em 0 1em 0;
 }
 
-h1, h2 {
-  margin-top: 200px;
+h1 {
+  margin-top: 100px;
   text-align: center;
   font-size: 80px;
 }
+
+h2 {
+  margin: 40px 0 50px 100px;
+  font-size: 50px;
+}
+
 h3 {
   margin: 100px 0 50px 100px;
 }

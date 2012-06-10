@@ -1,0 +1,32 @@
+#ml-dark {
+  background-color: hsl(0, 0%, 11%);
+  color: white;
+}
+
+#ml-images {
+  width: 700px;
+  margin: 20px auto 0 auto;
+}
+
+#ml-images img {
+  width: 300px;
+  height: 300px;
+}
+
+#clyon-image {
+  float: left;
+}
+
+#math-image {
+  float: right;
+}
+
+#ml-fun {
+  background-color: hsl(230, 85%, 66%);
+  background-image: url("images/fun-ml.png");
+  background-size: contain;
+}
+
+#ml-fun h1 {
+  margin-top: 160px;
+}
