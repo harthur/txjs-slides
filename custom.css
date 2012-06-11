@@ -1,10 +1,11 @@
 html, .view body { background-color: black; counter-reset: slideidx; }
 body, .view section { background-color: white; border-radius: 12px }
+
 /* A section is a slide. It's size is 800x600, and this will never change */
+
 section, .view head > title {
-    /* The font from Google */
-    font-family: 'Oswald', arial, serif;
-    font-size: 34px;
+  font-family: 'Istok Web', Arial, sans-serif;
+  font-size: 34px;
 }
 
 .view section:after {
@@ -20,6 +21,32 @@ section, .view head > title {
   margin: 1em 0 1em 0;
 }
 
+code {
+  background: #f8f8ff
+}
+
+pre code {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+pre {
+  display: block;
+  padding: 0;
+  position: relative;
+  width: 90%;
+  margin: 10px auto;
+  text-align: left;
+  font-size: 16px;
+  font-family: monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  vertical-align: baseline;
+}
+
+h1, h2 {
+  font-family: 'Oswald', League Gothic, arial, sans-serif;
+}
+
 h1 {
   margin-top: 100px;
   text-align: center;
@@ -28,7 +55,7 @@ h1 {
 
 h2 {
   margin: 40px 0 50px 100px;
-  font-size: 60px;
+  font-size: 50px;
 }
 
 h3 {
@@ -36,7 +63,7 @@ h3 {
 }
 
 ul {
-    margin: 50px 200px;
+    margin: 50px 100px;
 }
 
 p {

@@ -1,5 +1,41 @@
 section {
   color: hsl(282, 24%, 8%);
+  padding: 20px;
+}
+
+li {
+  margin-top: 0.5em;
+}
+
+.question {
+  line-height: 300px;
+}
+
+.chapter {
+  background-color: black;
+  color: white;
+}
+
+.chapter h1 {
+  line-height: 300px;
+}
+
+.check {
+  color: green;
+}
+
+.nay {
+  font-weight: bold;
+  color: rgb(170, 0, 0);
+}
+
+.yay {
+  font-weight: bold;
+  color: #13DAEC;
+}
+
+.em {
+  font-weight: bold;
 }
 
 #ml-dark {
@@ -33,4 +69,9 @@ section {
 
 #ml-fun h1 {
   margin-top: 160px;
+}
+
+#NaN {
+  font-weight: bold;
+  color: hsl(267, 98%, 49%)
 }
