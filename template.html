@@ -42,33 +42,17 @@
 <section id="examples">
     <h2>Examples</h2>
     <ul class="incremental">
-      <li>Clustering
-      <li>Spam filtering
-      <li>Face detection
+      <li>face detection
+      <li>spam filtering
+      <li>fraud detection
     </ul>
 </section>
 
-<section>
-    <h2>Traditional Computing</h2>
-    <h3>Hand-chosen conditionals and params</h3>
-    <pre>
-      <code class="javascript">
-        if (color.r > )
-      </code>
-    </pre>
-</section>
-
-<section>
-    <h2>ML algorithms</h2>
-    <ul>
-      <li>Rules are <span class="em">learned</span> from data
-      <li>Power lies in genericness
-    </ul>
-    <pre>
-      <code class="javascript">
-        if (color.r > )
-      </code>
-    </pre>
+<section class="point">
+    <div class="section"><span class="nay">traditional computing</span>:
+      Hand-chosen conditionals and params.</div>
+    <div class="section"><span class="yay">ML algorithms</span>:
+    Rules are <span class="em">learned</span> from data</div>
 </section>
 
 <section id="example" class="chapter">
@@ -78,54 +62,84 @@
 <section>
     <h2>The problem</h2>
     <div class="incremental">
-      <h3>Should I bother?</h3>
-      <h3>=</h3>
-      <h3>Does it have any cat pics?</h3>
+      <div class="q content">Should I bother?...</div>
+      <div class="q content">Does it have any cat pics?</div>
+      <div class="q content">***cat pics***??</div>
     </div>
 </section>
 
-<section>
-    <h2>The breakdown</h2>
-    <h3>does this image contain a cat?</h3>
+<section class="statement">
+    <h1>Cat Detection</h1>
+    <div>***cat pictures or cat with binoculars***</div>
 </section>
 
 <section>
-    <h2>The breakdown</h2>
-    <h3>is this subsection a cat head?</h3>
+    <h2>Breaking it down</h2>
+    <div class="cat-q">does this image contain a cat?</div>
+    <img id="big-cat" class="cat-pic" src="images/cats/big-cat.jpg">
 </section>
 
 <section>
-    <div class="question">We need a <span class="yay">classifier</span></div>
+    <h2>Breaking it down</h2>
+    <div class="cat-q">is this subsection a cat head?</div>
+    <img id="cat-head" class="cat-pic" src="images/cats/cat-head.jpg">
 </section>
 
 <section>
-    <h1>neural networks</h1>
+    <h2>We need a <span class="yay">classifier</span></h2>
+    <ul class="incremental">
+      <li>Takes a piece of data, tells you which class it's in
+      <li>Bayesian (spam), k-nearest neighbors, support vector machines,
+        <span class="chosen">neural networks<span>.
+      <li>Trained on data with known classifications
+    </ul>
+</section>
+
+<section>
+    <h2>neural networks</h2>
+    <pre id="nn-code">
+      <code class="javascript">
+       var runNetwork = function (input) {
+        var net = {"layers":[{"r":{},"g":{},"b":{}},{"0":{"bias":0.13371530407661836,"weights":{"r":0.00501071387182511,"g":0.21171902639442972,"b":0.08705423993715493}},"1":{"bias":-0.04034815707613256,"weights":{"r":-0.07845709341922519,"g":0.03649060503693453,"b":0.24516008746609408}},"2":{"bias":0.19106774614481303,"weights":{"r":-0.043261943004547936,"g":0.05253474796821468,"b":-0.09157893689061476}}},{"black":{"bias":1.3450220468608933,"weights":{"0":0.8194963226135531,"1":0.8112700830958888,"2":0.5731252384018746}}}]};
+
+        for (var i = 1; i < net.layers.length; i++) {
+          var layer = net.layers[i];
+          var outputs = {};
+
+          for (var id in layer) {
+            var node = layer[id];
+            var sum = node.bias;
+
+            for (var iid in node.weights) {
+              sum += node.weights[iid] * input[iid];
+            }
+            outputs[id] = (1/(1 + Math.exp(-sum)));
+          }
+          input = output;
+        }
+        return output;
+      }
+      </code>
+    </pre>
+    <details>
+      Not going to go into how it works, but these floating point values are trained.
+      Optimization problem, try to find floating point values that minimize the error in the training set.
 </section>
 
 <section>
   <h2>input and output</h2>
   <pre>
     <code class="javascript">
-      var brain = require("brain");
-
-      var net = new brain.NeuralNetwork();
-
-      // train on data with known answers
       net.train([
         { input: [0.7, 0.1, 0.3], output: [1] },
         { input: [1.0, 0.8, 0.7], output: [0] },
         { input: [0.5, 0.6, 0.7], output: [0] }
       ]);
 
-      // a new piece of data
       var output = net.run([0.5, 0.5, 0.6]);   // [0.001]
     </code>
   </pre>
-</section>
-
-<section>
-    <h2>Fit the problem to format</h2>
-    <ul>
+    <ul class="incremental">
       <li>output is <code>[1]</code> if cat, <code>[0]</code> if not
       <li>input is <code>[?, ?, ?, ...]</code>
     </ul>
@@ -133,40 +147,87 @@
 
 <section>
     <h2>What is the input?</h2>
-    <ul>
-      <li>Pixel intensities
-         <li>too much variation in cat fur</li>
-      </li>
-      <li>Edges
-         <li>leaves shape information</li>
-      </li>
-    </ul>
-</section>
+    <div class="incremental">
+      <div class="part">
+        <div class="title">
+          Pixels
+        </div>
+        <div>
+          <img class="small-head" src="images/cats/cat1.jpg"></img>
+          <img class="small-head" src="images/cats/cat2.jpg"></img>
+          <img class="small-head" src="images/cats/cat3.jpg"></img>
+          <img class="small-head" src="images/cats/cat4.jpg"></img>
+        </div>
+      </div>
+      <span class="addition nay">too much variation</span>
+      <div class="part">
+        <div class="title">
+          Edges
+        </div>
+        <div>
+          <img class="small-head" src="images/cats/cat1-mag.jpg"></img>
+          <img class="small-head" src="images/cats/cat2-mag.jpg"></img>
+          <img class="small-head" src="images/cats/cat3-mag.jpg"></img>
+          <img class="small-head" src="images/cats/cat4-mag.jpg"></img>
+        </div>
+      </div>
+      <span class="addition yay">leaves shape information</span>
+    </div>
 
+    <details>want to make it easy on the network, giving it data
+      it can get a better handle on, data that doesn't vary too much
+    </details>
+</section>
 
 <section>
   <h2>Histogram of Oriented Gradients</h2>
   <ul class="incremental">
-    <li>Pixels -> array of #s from 0 to 1</li>
-      <span class="check">perfect!</span>
     <li>Captures info about the strength + direction of edges</li>
+    <li>Pixels -> array of #s from <code>0</code> to <code>1</code></li>
+      <span class="yay">perfect!</span>
+    <li><code>48x48</code> canvas yeilds HOG of length <code>1176</code></li>
   </ul>
 </section>
 
 <section>
+  <h2>Collection</h2>
+  <ul>
+    <li><span class="em">negatives</span>:
+      1000s of cat-free crops from Flickr
+    </li>
+    <li><span class="em">positives</span>:
+      1000s of cat head crops
+    </li>
+    <li>using
+      <a href="https://github.com/LearnBoost/node-canvas">
+        node-canvas
+      </a>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Training</h2>
   <pre>
     <code class="javascript">
     var hog = require("hog-descriptor");
 
-    var input = hog.extractHOG(canvas);  // [0.66, 0.91, 0.0005,....]
-    var output = [0];     // this one's not a cat =(
+    var data = [];
+
+    pics.forEach(function(pic) {
+      data.push({
+        input: hog.extractHOG(pic.canvas),
+        expected: [pic.cat ? 1 : 0]
+      })
+    })
+
+    net.train(data);
     </code>
   </pre>
-  <div>Do that for 10,000 cat heads and 10,000 non-cat heads</div>
 </section>
 
 <section>
-  Given an subsection, is it a cat head? (check)
+  <h3>Is this subsection a cat head?</h3>
   <pre>
     <code class="javascript">
     function isCat(canvas) {
@@ -174,14 +235,14 @@
 
       var prob = net.run(features);
 
-      return prob > 0.5;
+      return prob > 0.9;
     }
     </code>
   </pre>
 </section>
 
 <section>
-  Given an image, does it contain a cat?
+  <h3>Does this image contain a cat?</h3>
   <ul>
     <li>Test "windows" at different scales, locations
     <li>Combine overlapping detections
@@ -202,14 +263,75 @@
   <ul class="incremental">
     <li>Weak typing / implicit conversions</li>
       <div><code class="nay">NaN</code>...was it <code>0/0</code>
-      or <code>Math.abs("hello")</code>
-      or <code>undefined + 7</code>?
+      , <code>Math.abs("txt")</code>, or <code>undefined + 7</code>?
       </div>
     </li>
     <li>Speed</li>
     <span class="yay">not that bad</span>
+    <li>Lack of building blocks</li>
   </ul>
 </section>
+
+<section>
+  <h2>If you do</h2>
+  <ul class="incremental">
+    <li>write for <span class="yay">node</span> first
+    <li class="subli">robust testing of lots of data</li>
+    <li class="subli">easy use of libraries</li>
+    <li class="subli">build for browser
+      <a class="repo" href="http://github.com/substack/node-browserify">
+        substack/node-browserify
+      </a>
+    </li>
+    </li>
+    <li>functional libs
+      <a class="repo" href="documentcloud.github.com/underscore/">
+        underscore
+      </a>
+    </li>
+      <div class="nay">but not in perf critical paths</div>
+    <li><a href="http://jsperf.com">jsPerf</a></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Libraries</h2>
+  <ul>
+    <li>Neural networks</li>
+      <a class="repo" href="http://github.com/harthur/brain">
+        harthur/brain
+      </a>
+    <li>Bayesian classifiers</li>
+      <span class="repo">
+        <a href="https://github.com/NaturalNode/natural">
+          NaturalNode/natural
+        </a>
+        <span class="link-details">(also has NLP!)</span>
+      </span>
+      <a class="repo" href="https://github.com/harthur/classifier">
+        harthur/classifier
+      </a>
+    <li>Clustering</li>
+      <a class="repo" href="https://github.com/harthur/clusterfck">
+        harthur/clusterfck
+      </a>
+    </ul>
+</section>
+
+<section>
+  <h2>Some Apps</h2>
+  <ul>
+    <li>Face recognition</li>
+    <a href="http://liuliu.me/ccv/js/nss/">liuliu/ccv</a>
+    <li>Hacker News filter</li>
+    <a href="">***url***</a>
+    <li>Nudity detection</li>
+    <a href="">***url***</a>
+    <li>OCR on Captchas<li>
+    <a href="">***url***</a>
+  </ul>
+</section>
+
 
 <div id="progress-bar"></div>
 
