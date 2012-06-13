@@ -40,12 +40,16 @@ a {
   font-size: 26px;
 }
 
+.chosen {
+  font-weight: bold;
+}
+
 .part, .addition {
   margin-left: 50px;
 }
 
 .part {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .part .title {
@@ -70,7 +74,7 @@ a {
 }
 
 .chapter {
-  background-color: black;
+  background-color: hsl(0, 0%, 10%);
   color: white;
 }
 
@@ -131,18 +135,53 @@ a {
 
 .cat-pic {
   display: block;
-  width: 500px;
-  margin: 0 auto;
   border: 4px solid #CCC;
   border-radius: 3px;
 }
 
 #big-cat {
   width: 400px;
+  margin: 0 auto;
+}
+
+#crops {
+  width: 430px;
+  margin: 0 auto;
 }
 
 #cat-head {
   width: 200px;
+  float: left;
+}
+
+#no-cat {
+  width: 200px;
+  float: right;
+}
+
+#cd-header {
+  margin-top: 100px;
+  margin-bottom: 70px;
+}
+
+#cat-detection {
+  background-color: hsl(0, 0%, 10%); /* hsl(46, 23.3%, 14.3%); */
+  color: hsl(198, 100%, 67%); /* hsl(200, 97%, 74%); */
+}
+
+#detection-cat {
+  display: block;
+  width: 320px;
+  margin: 0 auto;
+  border: 5px solid #333;
+  border-radius: 3px;
+}
+
+#question-cat {
+  display: block;
+  margin: 140px auto 0 auto;
+  border: 7px solid #333;
+  border-radius: 3px;
 }
 
 .cat-q {

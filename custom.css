@@ -43,6 +43,7 @@ pre {
   font-size: 16px;
   font-family: monospace;
   line-height: 1.2em;
+  white-space: pre;
   word-wrap: break-word;
   vertical-align: baseline;
 }

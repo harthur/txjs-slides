@@ -68,9 +68,9 @@
     </div>
 </section>
 
-<section class="statement">
-    <h1>Cat Detection</h1>
-    <div>***cat pictures or cat with binoculars***</div>
+<section id="cat-detection">
+    <h1 id="cd-header">Cat Detection</h1>
+    <img id="detection-cat" src="images/radar-cat.jpg"></img>
 </section>
 
 <section>
@@ -82,16 +82,19 @@
 <section>
     <h2>Breaking it down</h2>
     <div class="cat-q">is this subsection a cat head?</div>
-    <img id="cat-head" class="cat-pic" src="images/cats/cat-head.jpg">
+    <div id="crops">
+      <img id="cat-head" class="cat-pic" src="images/cats/cat-head.jpg">
+      <img id="no-cat" class="cat-pic" src="images/no-cat.jpg">
+    </div>
 </section>
 
 <section>
     <h2>We need a <span class="yay">classifier</span></h2>
     <ul class="incremental">
-      <li>Takes a piece of data, tells you which class it's in
+      <li>Takes a piece of data, tells you which class it's in.
+      <li>Trained with known classifications
       <li>Bayesian (spam), k-nearest neighbors, support vector machines,
         <span class="chosen">neural networks<span>.
-      <li>Trained on data with known classifications
     </ul>
 </section>
 
@@ -99,26 +102,26 @@
     <h2>neural networks</h2>
     <pre id="nn-code">
       <code class="javascript">
-       var runNetwork = function (input) {
-        var net = {"layers":[{"r":{},"g":{},"b":{}},{"0":{"bias":0.13371530407661836,"weights":{"r":0.00501071387182511,"g":0.21171902639442972,"b":0.08705423993715493}},"1":{"bias":-0.04034815707613256,"weights":{"r":-0.07845709341922519,"g":0.03649060503693453,"b":0.24516008746609408}},"2":{"bias":0.19106774614481303,"weights":{"r":-0.043261943004547936,"g":0.05253474796821468,"b":-0.09157893689061476}}},{"black":{"bias":1.3450220468608933,"weights":{"0":0.8194963226135531,"1":0.8112700830958888,"2":0.5731252384018746}}}]};
+        function runNetwork(input) {
+          var net = {"layers":[{"0":{},"1":{}},{"0":{"bias":5.1244897557632765,"weights":{"0":-3.591317000303657,"1":-3.594502936141513}},"1":{"bias":1.4480619514263766,"weights":{"0":-5.021099423700753,"1":-5.055736046304716}},"2":{"bias":0.655017127607016,"weights":{"0":-3.9842614825641096,"1":-4.020357237374914}}},{"0":{"bias":-3.093322979654723,"weights":{"0":7.328941033927063,"1":-5.699647431673055,"2":-3.879799253666414}}}]};
 
-        for (var i = 1; i < net.layers.length; i++) {
-          var layer = net.layers[i];
-          var outputs = {};
+          for (var i = 1; i < net.layers.length; i++) {
+            var layer = net.layers[i];
+            var output = {};
 
-          for (var id in layer) {
-            var node = layer[id];
-            var sum = node.bias;
+            for (var id in layer) {
+              var node = layer[id];
 
-            for (var iid in node.weights) {
-              sum += node.weights[iid] * input[iid];
+              var sum = node.bias;
+              for (var iid in node.weights) {
+                sum += node.weights[iid] * input[iid];
+              }
+              output[id] = (1 / (1 + Math.exp(-sum)));
             }
-            outputs[id] = (1/(1 + Math.exp(-sum)));
+            input = output;
           }
-          input = output;
+          return output;
         }
-        return output;
-      }
       </code>
     </pre>
     <details>
@@ -182,23 +185,26 @@
 <section>
   <h2>Histogram of Oriented Gradients</h2>
   <ul class="incremental">
-    <li>Captures info about the strength + direction of edges</li>
-    <li>Pixels -> array of #s from <code>0</code> to <code>1</code></li>
+    <li>Captures strength + direction of edges</li>
+    <li>Pixels &rarr; array of #s from <code>0</code> to <code>1</code></li>
       <span class="yay">perfect!</span>
-    <li><code>48x48</code> canvas yeilds HOG of length <code>1176</code></li>
+    <li><code>48x48</code> canvas  &rarr; HOG of length <code>1176</code></li>
   </ul>
 </section>
 
 <section>
   <h2>Collection</h2>
-  <ul>
+  <ul incremental="true">
     <li><span class="em">negatives</span>:
-      1000s of cat-free crops from Flickr
+      1000s of cat-free crops
     </li>
     <li><span class="em">positives</span>:
       1000s of cat head crops
     </li>
-    <li>using
+    <li>
+      resize to <code>48x48</code>
+    </li>
+    <li>
       <a href="https://github.com/LearnBoost/node-canvas">
         node-canvas
       </a>
@@ -211,6 +217,7 @@
   <pre>
     <code class="javascript">
     var hog = require("hog-descriptor");
+    var brain = require("brain");
 
     var data = [];
 
@@ -220,6 +227,8 @@
         expected: [pic.cat ? 1 : 0]
       })
     })
+
+    var net = new brain.NeuralNetwork();
 
     net.train(data);
     </code>
@@ -322,16 +331,19 @@
   <h2>Some Apps</h2>
   <ul>
     <li>Face recognition</li>
-    <a href="http://liuliu.me/ccv/js/nss/">liuliu/ccv</a>
+    <a class="repo" href="http://liuliu.me/ccv/js/nss/">liuliu/ccv</a>
     <li>Hacker News filter</li>
-    <a href="">***url***</a>
+    <a href="https://github.com/rogerbraun/HNBayes">rogerbraun/HNBayes</a>
     <li>Nudity detection</li>
-    <a href="">***url***</a>
-    <li>OCR on Captchas<li>
-    <a href="">***url***</a>
+    <a class="repo" href="https://github.com/pa7/nude.js">pa7/nude.js</a>
+    <li>OCR on Captchas</li>
+    <a class="repo" href="http://ejohn.org/blog/ocr-and-neural-nets-in-javascript/">OCR</a>
   </ul>
 </section>
 
+<section class="chapter">
+  <img id="question-cat" src="images/question-cat.jpg"></img>
+</section>
 
 <div id="progress-bar"></div>
 
