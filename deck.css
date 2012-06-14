@@ -28,7 +28,12 @@ a {
 }
 
 .q:nth-child(3) {
-  font-size: 1.4em;
+  font-size: 1.8em;
+}
+
+#cat-pics {
+  width: 400px;
+  vertical-align: middle;
 }
 
 .subli {

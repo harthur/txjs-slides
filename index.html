@@ -44,7 +44,8 @@
     <ul class="incremental">
       <li>face detection
       <li>spam filtering
-      <li>fraud detection
+      <li>recommendation systems
+      <li>character recognition
     </ul>
 </section>
 
@@ -53,6 +54,15 @@
       Hand-chosen conditionals and params.</div>
     <div class="section"><span class="yay">ML algorithms</span>:
     Rules are <span class="em">learned</span> from data</div>
+</section>
+
+<section>
+  <h1>Training</h1>
+  <ul class="incremental">
+    <li>Learn rules by training on labelled data</li>
+    <li>same algorithm, different data</li>
+    <li>generic = power</li>
+  </ul>
 </section>
 
 <section id="example" class="chapter">
@@ -64,7 +74,9 @@
     <div class="incremental">
       <div class="q content">Should I bother?...</div>
       <div class="q content">Does it have any cat pics?</div>
-      <div class="q content">***cat pics***??</div>
+      <div class="q content" id="cat-pics-cont">
+        <img id="cat-pics" src="images/cat-pics.png"></img>???
+      </div>
     </div>
 </section>
 
@@ -255,6 +267,7 @@
   <ul>
     <li>Test "windows" at different scales, locations
     <li>Combine overlapping detections
+    <li>Weed out spurious detections
   </ul>
 </section>
 
@@ -271,9 +284,12 @@
   <h2>Not As Fun</h2>
   <ul class="incremental">
     <li>Weak typing / implicit conversions</li>
-      <div><code class="nay">NaN</code>...was it <code>0/0</code>
-      , <code>Math.abs("txt")</code>, or <code>undefined + 7</code>?
-      </div>
+      <li class="subli"><code>NaN</code>...<code>0/0</code>
+      or <code>undefined + 7</code>?
+      </li>
+      <li class="subli">
+        worse: <code>Math.abs(null) = 0</code> <span class="nay">silent destruction</span>
+      </li>
     </li>
     <li>Speed</li>
     <span class="yay">not that bad</span>
@@ -333,7 +349,7 @@
     <li>Face recognition</li>
     <a class="repo" href="http://liuliu.me/ccv/js/nss/">liuliu/ccv</a>
     <li>Hacker News filter</li>
-    <a href="https://github.com/rogerbraun/HNBayes">rogerbraun/HNBayes</a>
+    <a class="repo"href="https://github.com/rogerbraun/HNBayes">rogerbraun/HNBayes</a>
     <li>Nudity detection</li>
     <a class="repo" href="https://github.com/pa7/nude.js">pa7/nude.js</a>
     <li>OCR on Captchas</li>
