@@ -231,13 +231,11 @@
     var hog = require("hog-descriptor");
     var brain = require("brain");
 
-    var data = [];
-
-    pics.forEach(function(pic) {
-      data.push({
+    var data = pics.map(function(pic) {
+      return {
         input: hog.extractHOG(pic.canvas),
         expected: [pic.cat ? 1 : 0]
-      })
+      }
     })
 
     var net = new brain.NeuralNetwork();
